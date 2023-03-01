@@ -1,0 +1,301 @@
+
+:root {
+    --mainfont: "Helvetica Neue", "Lucida Sans Unicode", Helvetica, Arial, sans-serif;
+    --monofont: "Courier", monospace;
+    --margin: 32px;
+    --spacing: 16px;
+}
+
+body, button, input, select, option {
+    font-family: var(--mainfont);
+    font-size: 16px;
+}
+
+h1 {
+    margin: 0;
+    padding: 0;
+    font-size: 30px;
+}
+
+a {
+    color: #333;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+.test {
+    background-color: cyan;
+}
+
+div{
+    /* For testing purposes: */
+    /* border: 1px solid green; */
+}
+
+#heading-container {
+    display: flex;
+    align-items: top;
+    border-bottom: 1px solid black;
+    padding: var(--spacing) 0;
+    margin-bottom: var(--spacing);
+}
+
+#menu-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+#menu-container > * {
+    margin: 0;
+    padding: 0;
+    padding-left: var(--spacing);
+}
+
+#button-upload-dictionary {
+    display: none;
+}
+
+select, button, label {
+    font-size: 16px;
+    border: 1px solid grey;
+    border-radius: 8px;
+    background-color: white;
+    color: black;
+    margin: 2px;
+    padding: 6px 12px;
+    cursor: pointer;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+input[type="checkbox"] {
+    display: none;
+}
+
+input[type="checkbox"]:checked + label {
+    background-color: black;
+    color: white;
+}
+
+@media screen {
+    select:hover, button:hover, label:hover, #crossword-table td:hover {
+        background-color: #eee !important;
+    }
+}
+
+@media print {
+    .github-corner {
+        display: none;
+    }
+
+    #main-container {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+
+    #heading-container, button {
+        display: none;
+    }
+
+    td {
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+    }
+}
+
+#crossword-wrapper button, #wordlist-filter-wrapper button {
+    padding: 0;
+    height: 24px;
+    padding: 0 8px;
+    border: 0;
+    background-color: #eee;
+}
+
+#wordlist-content button {
+    padding: 1px 6px;
+    font-family: var(--monofont);
+    font-size: 20px;
+}
+
+/* Arrow icon */
+select {
+    padding-right: 30px;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22grey%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
+    background-repeat: no-repeat;
+    background-position: right .7em top 50%;
+    background-size: .65em auto;
+}
+
+/* Hide arrow icon in IE browsers */
+select::-ms-expand {
+  display: none;
+}
+
+#main-container, #clues-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#wordlist-container, #clues-container > div {
+    margin-left: var(--margin);
+}
+
+#crossword-container {
+    text-align: center;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+#crossword-title:empty::after, .cluetext:empty::after {
+    content: "(Click and type)";
+    color: grey;
+}
+
+#crossword-wrapper #crossword-theme {
+    text-align: left;
+    color: green;
+}
+
+#crossword-theme:not(:empty)::before {
+    content: "Theme word: ";
+}
+
+.clueword {
+    color: red;
+}
+
+#crossword-wrapper td {
+    border-style: none;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.resize-wrapper {
+    width: var(--margin);
+    height: var(--margin);
+}
+
+#crossword-table {
+    background-color: #ccc;
+    cursor: cell;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+#crossword-table.selecting {
+    cursor: all-scroll;
+}
+
+#crossword-table td {
+    border: black solid 1px;
+    width: 1.5em;
+    height: 1.5em;
+    font-size: 24px;
+    font-family: var(--monofont);
+    vertical-align: middle;
+    text-align: center;
+    position: relative;
+}
+
+#crossword-table td:not(:empty) {
+    background-color: white;
+}
+
+#crossword-table td::before {
+    color: black;
+    position: absolute;
+    font-family: var(--mainfont);
+    font-size: 12px;
+    content: attr(data-cluenr);
+    left: 2px;
+    top: 0;
+}
+
+#crossword-table td.right-turn::after,
+#crossword-table td.down-turn::after {
+    color: black;
+    position: absolute;
+    font-size: 16px;
+}
+
+#crossword-table td.right-turn::after {
+    content: "\21B3";
+    left: 2px;
+    bottom: 0;
+}
+
+#crossword-table td.down-turn::after {
+    content: "\21B4";
+    right: 0;
+    top: 0;
+}
+
+#crossword-table td.selected {
+    background-color: yellow;
+}
+
+#crossword-table td.blocked {
+    color: transparent;
+    background-color: black;
+    font-size: 8px;
+    font-family: var(--mainfont);
+}
+
+#crossword-table td.theme {
+    color: green;
+}
+
+#main-container.hide-solution {
+    pointer-events: none;
+}
+
+#main-container.hide-solution #crossword-table td {
+    color: transparent;
+}
+
+#main-container.hide-solution .clueword,
+#main-container.hide-solution #crossword-theme {
+    display: none;
+}
+
+#wordlist-container {
+    flex: 1;
+    min-width: 30%;
+}  
+
+#wordlist-filter {
+    text-transform: uppercase;
+}
+
+
+.debug {
+    font-family: serif;
+    font-size: 12px;
+    color: red;
+    padding: 2px;
+}
+
+/* "Fork me on GitHub", taken from: https://github.com/tholman/github-corners */
+.github-corner svg {
+    fill: grey; color: white;
+    position: absolute; top: 0; border: 0; right: 0;
+}
+.github-corner:hover .octo-arm {
+    animation: octocat-wave 560ms ease-in-out;
+}
+@keyframes octocat-wave {
+    0%, 100% { transform: rotate(0) }
+    20%, 60% { transform: rotate(-25deg) }
+    40%, 80% { transform: rotate(10deg) }
+}
+@media (max-width:500px) {
+    .github-corner:hover .octo-arm { animation: none }
+    .github-corner .octo-arm { animation: octocat-wave 560ms ease-in-out }
+}
